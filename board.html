@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>لوحة جمعية مسك الختام</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+  margin:0;
+  background:#0f2027;
+  color:white;
+  font-family:Tahoma;
+  text-align:center;
+}
+.box{
+  margin:30px auto;
+  max-width:400px;
+  background:#203a43;
+  padding:20px;
+  border-radius:15px;
+}
+.clock{
+  font-size:40px;
+  margin:20px 0;
+  border:2px solid white;
+  border-radius:10px;
+  padding:10px;
+}
+table{
+  width:100%;
+  margin-top:20px;
+  font-size:18px;
+}
+td{
+  padding:6px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h2>جمعية مسك الختام الخيرية</h2>
+  <p>القرارم قوقة – ولاية ميلة</p>
+  <div class="clock" id="clock">--:--:--</div>
+
+  <table>
+    <tr><td>الفجر</td><td>05:47</td></tr>
+    <tr><td>الظهر</td><td>12:34</td></tr>
+    <tr><td>العصر</td><td>15:32</td></tr>
+    <tr><td>المغرب</td><td>17:53</td></tr>
+    <tr><td>العشاء</td><td>19:11</td></tr>
+  </table>
+</div>
+
+<script>
+function updateClock(){
+  document.getElementById("clock").innerText =
+    new Date().toLocaleTimeString("ar-DZ");
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>
