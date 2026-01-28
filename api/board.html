@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>لوحة جمعية مسك الختام</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+  margin:0;
+  background:#0f2027;
+  color:white;
+  font-family:Tahoma;
+  text-align:center;
+}
+.box{
+  margin:30px auto;
+  max-width:400px;
+  background:#203a43;
+  padding:20px;
+  border-radius:15px;
+}
+.clock{
+  font-size:40px;
+  margin:20px 0;
+  border:2px solid white;
+  border-radius:10px;
+  padding:10px;
+}
+table{
+  width:100%;
+  margin-top:20px;
+  font-size:18px;
+}
+td{
+  padding:6px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h2>جمعية مسك الختام الخيرية</h2>
+  <p>القرارم قوقة – ولاية ميلة</p>
+  <div class="clock" id="clock">--:--:--</div>
+
+  <table>
+    <tr><td>الفجر</td><td id="fajr">--:--</td></tr>
+    <tr><td>الظهر</td><td id="dhuhr">--:--</td></tr>
+    <tr><td>العصر</td><td id="asr">--:--</td></tr>
+    <tr><td>المغرب</td><td id="maghrib">--:--</td></tr>
+    <tr><td>العشاء</td><td id="isha">--:--</td></tr>
+  </table>
+  <p id="status">جاري تحميل المواقيت…</p>
+</div>
+
+<script>
+function updateClock(){
+  document.getElementById("clock").innerText =
+    new Date().toLocaleTimeString("ar-DZ");
+}
+setInterval(updateClock,1000);
+updateClock();
+
+// جلب مواقيت الصلاة من API
+fetch("/api/prayer")
+.then(res => res.json())
+.then(t => {
+  document.getElementById("fajr").innerText = t.Fajr;
+  document.getElementById("dhuhr").innerText = t.Dhuhr;
+  document.getElementById("asr").innerText = t.Asr;
+  document.getElementById("maghrib").innerText = t.Maghrib;
+  document.getElementById("isha").innerText = t.Isha;
+  document.getElementById("status").innerText = "تم تحميل المواقيت بنجاح";
+})
+.catch(() => {
+  document.getElementById("status").innerText = "خطأ في تحميل المواقيت";
+});
+</script>
+
+</body>
+</html>
